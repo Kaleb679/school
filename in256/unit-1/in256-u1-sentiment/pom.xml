@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>edu.pg.in256</groupId>
+  <artifactId>in256-u1-sentiment</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>IN256 U1 Sentiment Analyzer</name>
+  <url>http://www.example.com</url>
+
+  <!-- ✅ Java 17 configuration -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
+  <!-- ✅ Dependencies -->
+  <dependencies>
+
+    <!-- ✅ Unit Testing (Latest JUnit 4) -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- ✅ Weka for CSVLoader, StringToWordVector -->
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-stable</artifactId>
+      <version>3.8.6</version>
+    </dependency>
+
+    <!-- ✅ Simple Logging Facade for Java -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.16</version>
+    </dependency>
+
+  </dependencies>
+
+  <!-- ✅ Build configuration -->
+  <build>
+    <plugins>
+
+      <!-- ✅ Compiler Plugin (latest stable 2025) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+
+      <!-- ✅ Runnable JAR with all dependencies -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.7.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>edu.pg.in256.App</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- ✅ Optional: Allows `mvn exec:java` -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <mainClass>edu.pg.in256.App</mainClass>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>
